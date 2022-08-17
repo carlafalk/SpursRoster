@@ -1,8 +1,12 @@
-###
+### GET ALL PLAYERS
 
 GET http://localhost:3000/
 
 ###
+
+GET http://localhost:3000/11
+
+### POST PLAYER
 
 POST http://localhost:3000/
 Content-Type: application/json
@@ -10,6 +14,10 @@ Content-Type: application/json
 {
     "name": "asdasd Kane",
     "position": "Forward",
-    "number": 10,
+    "number": 11,
     "nationality": "Brittish"
 }
+
+### DELETE ALL PLAYERS
+
+DELETE http://localhost:3000/
