@@ -21,3 +21,15 @@ Content-Type: application/json
 ### DELETE ALL PLAYERS
 
 DELETE http://localhost:3000/
+
+###
+
+PUT http://localhost:3000/11
+Content-Type: application/json
+
+{
+    "name": "harry Kane",
+    "position": "Forward",
+    "number": 10,
+    "nationality": "Brittish"
+}

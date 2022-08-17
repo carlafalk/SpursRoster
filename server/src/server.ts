@@ -4,6 +4,7 @@ import {
   savePlayer,
   deleteAllPlayers,
   getPlayerByNumber,
+  updatePlayerInfo,
 } from "./apiController";
 
 const app = Express();
@@ -15,6 +16,7 @@ app.get("/", getAllPlayers);
 app.get("/:number", getPlayerByNumber);
 app.post("/", savePlayer);
 app.delete("/", deleteAllPlayers);
+app.put("/:number", updatePlayerInfo);
 
 app.listen(port, () =>
   console.log(`currently running on https://localhost:${port}`)
