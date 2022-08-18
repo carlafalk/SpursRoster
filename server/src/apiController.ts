@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { nanoid } from "nanoid";
-import { writeToJson } from "./middlewares";
+import { readFromJson, writeToJson } from "./middlewares";
 import { SpursPlayer, teamRoster } from "./playerModel";
 
 export const getAllPlayers = (req: Request, res: Response) => {
   if (teamRoster.length < 1) {
     res.status(204).json();
   } else {
+    readFromJson();
     res.status(200).json(teamRoster);
   }
 };
@@ -16,8 +17,7 @@ export const savePlayer = (req: Request, res: Response) => {
     id: nanoid(),
     ...req.body,
   };
-  const playerToBeAdded: SpursPlayer = data;
-  writeToJson(playerToBeAdded);
+  writeToJson(data);
 
   res.status(201).json(data);
 };
