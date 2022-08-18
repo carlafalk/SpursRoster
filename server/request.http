@@ -4,7 +4,7 @@ GET http://localhost:3000/
 
 ### GET PLAYER BY NUMBER
 
-GET http://localhost:3000/11
+GET http://localhost:3000/10
 
 ### ADD PLAYER
 
@@ -12,10 +12,10 @@ POST http://localhost:3000/
 Content-Type: application/json
 
 {
-    "name": "Harry Kane",
+    "name": "Dejan Kulusevski",
     "position": "striker",
-    "number": 10,
-    "nationality": "Brittish"
+    "number": 21,
+    "nationality": "Swedish"
 }
 
 ### DELETE ALL PLAYERS
@@ -24,12 +24,12 @@ DELETE http://localhost:3000/
 
 ### UPDATE PLAYER INFORMATION
 
-PUT http://localhost:3000/11
+PUT http://localhost:3000/10
 Content-Type: application/json
 
 {
     "name": "Harry Kane",
     "position": "striker",
-    "number": 10,
+    "number": 55,
     "nationality": "Brittish"
 }

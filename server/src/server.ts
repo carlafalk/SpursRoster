@@ -19,6 +19,9 @@ app.post("/", validatePlayer, savePlayer);
 app.delete("/", deleteAllPlayers);
 app.put("/:number", validatePlayer, updatePlayerInfo);
 
+// app.use(notFoundHandler);
+// app.use(errorHandler);
+
 app.listen(port, () =>
   console.log(`currently running on https://localhost:${port}`)
 );

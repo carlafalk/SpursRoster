@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs";
-import { playerSchema, SpursPlayer, teamRoster } from "./playerModel";
+import { playerSchema, teamRoster } from "./playerModel";
 
 export const validatePlayer = (
   req: Request,
@@ -15,8 +15,7 @@ export const validatePlayer = (
   }
 };
 
-export function writeToJson(playerToBeAdded: SpursPlayer) {
-  teamRoster.push(playerToBeAdded);
+export function writeToJson() {
   const teamRosterString = JSON.stringify(teamRoster, null, "\t");
 
   fs.writeFile("./src/players.json", teamRosterString, (err: any) => {
@@ -26,15 +25,40 @@ export function writeToJson(playerToBeAdded: SpursPlayer) {
   });
 }
 
+// export function readFromJson() {
+//   fs.readFile("./src/players.json", "utf-8", (err, teamRosterString) => {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       let teamRosterJSON = JSON.parse(teamRosterString);
+//       teamRoster.splice(0, teamRoster.length);
+//       teamRoster.push(...teamRosterJSON);
+//     }
+//   });
+// }
+
 export function readFromJson() {
-  fs.readFile("./src/players.json", "utf-8", (err, teamRosterString) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let teamRosterJSON = JSON.parse(teamRosterString);
-      teamRoster.push(...teamRosterJSON);
-      console.log(teamRoster);
-    }
-  });
+  let teamRosterString = fs.readFileSync("./src/players.json", "utf-8");
+  const teamRosterJSON = JSON.parse(teamRosterString);
+
+  teamRoster.splice(0, teamRoster.length);
+  teamRoster.push(...teamRosterJSON);
 }
-//errorhandler, notfoundhandler
+
+// export const errorHandler = (
+//   err: Error,
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   console.error(err);
+//   res.status(500).json(err.message);
+// };
+
+// export const notFoundHandler = (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   res.status(404).json("Resource does not exist.");
+// };

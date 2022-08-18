@@ -1,44 +1,22 @@
 [
-	{
-		"id": "X229EcAB_NPtIwqrS9Fm5",
-		"name": "Harry Kane",
-		"position": "striker",
-		"number": 10,
-		"nationality": "Brittish"
-	},
-	{
-		"id": "X229EcAB_NPtIwqrS9Fm5",
-		"name": "Harry Kane",
-		"position": "striker",
-		"number": 10,
-		"nationality": "Brittish"
-	},
-	{
-		"id": "v367VVA-iASqUBp8DPlVO",
-		"name": "Harry Kane",
-		"position": "striker",
-		"number": 10,
-		"nationality": "Brittish"
-	},
-	{
-		"id": "SCRQuQ4PdfwNyswNCqZpe",
-		"name": "Harry Kane",
-		"position": "striker",
-		"number": 10,
-		"nationality": "Brittish"
-	},
-	{
-		"id": "hAN-D9Wu_sX9nK3zpMSs6",
-		"name": "Harry Kane",
-		"position": "striker",
-		"number": 10,
-		"nationality": "Brittish"
-	},
-	{
-		"id": "PD20P7j0gtJSJNW7-RnfL",
-		"name": "Harry Kane",
-		"position": "striker",
-		"number": 10,
-		"nationality": "Brittish"
-	}
+  {
+    "id": "TuXPvr2Gvv4iplktY_lh7",
+    "name": "Hugo Lloris",
+    "position": "goal keeper",
+    "number": 33,
+    "nationality": "French"
+  },
+  {
+    "name": "Harry Kane",
+    "position": "striker",
+    "number": 55,
+    "nationality": "Brittish"
+  },
+  {
+    "id": "H8BWTJ-LnM1eLHA-75UoY",
+    "name": "Dejan Kulusevski",
+    "position": "striker",
+    "number": 21,
+    "nationality": "Swedish"
+  }
 ]
