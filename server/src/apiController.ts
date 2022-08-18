@@ -1,11 +1,15 @@
-import { NextFunction, raw, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { nanoid } from "nanoid";
-import SpursPlayer from "./playerModel";
+import { playerSchema, SpursPlayer } from "./playerModel";
 
 const teamRoster: SpursPlayer[] = [];
 
 export const getAllPlayers = (req: Request, res: Response) => {
-  res.status(200).json(teamRoster);
+  if (teamRoster.length < 1) {
+    res.status(204).json();
+  } else {
+    res.status(200).json(teamRoster);
+  }
 };
 
 export const savePlayer = (req: Request, res: Response) => {
@@ -13,16 +17,15 @@ export const savePlayer = (req: Request, res: Response) => {
     id: nanoid(),
     ...req.body,
   };
-
-  res.status(201).json(data);
-
   const playerToBeAdded: SpursPlayer = data;
   teamRoster.push(playerToBeAdded);
+
+  res.status(201).json(data);
 };
 
 export const deleteAllPlayers = (req: Request, res: Response) => {
   teamRoster.splice(0, teamRoster.length);
-  res.status(200).json(teamRoster);
+  res.status(200).json();
 };
 
 export const getPlayerByNumber = (req: Request, res: Response) => {
@@ -44,5 +47,18 @@ export const updatePlayerInfo = (req: Request, res: Response) => {
     res.status(204).json();
   } else {
     res.status(404).json();
+  }
+};
+
+export const validatePlayer = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const result = playerSchema.validate(req.body);
+  if (!result.error) {
+    next();
+  } else {
+    res.status(400).json(result.error.message);
   }
 };

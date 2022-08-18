@@ -2,19 +2,19 @@
 
 GET http://localhost:3000/
 
-###
+### GET PLAYER BY NUMBER
 
 GET http://localhost:3000/11
 
-### POST PLAYER
+### ADD PLAYER
 
 POST http://localhost:3000/
 Content-Type: application/json
 
 {
-    "name": "asdasd Kane",
-    "position": "Forward",
-    "number": 11,
+    "name": "Harry Kane",
+    "position": "striker",
+    "number": 10,
     "nationality": "Brittish"
 }
 
@@ -22,14 +22,14 @@ Content-Type: application/json
 
 DELETE http://localhost:3000/
 
-###
+### UPDATE PLAYER INFORMATION
 
 PUT http://localhost:3000/11
 Content-Type: application/json
 
 {
-    "name": "harry Kane",
-    "position": "Forward",
+    "name": "Harry Kane",
+    "position": "striker",
     "number": 10,
     "nationality": "Brittish"
 }
