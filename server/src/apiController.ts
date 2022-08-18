@@ -1,8 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { nanoid } from "nanoid";
-import { playerSchema, SpursPlayer } from "./playerModel";
-
-const teamRoster: SpursPlayer[] = [];
+import { writeToJson } from "./middlewares";
+import { SpursPlayer, teamRoster } from "./playerModel";
 
 export const getAllPlayers = (req: Request, res: Response) => {
   if (teamRoster.length < 1) {
@@ -18,7 +17,7 @@ export const savePlayer = (req: Request, res: Response) => {
     ...req.body,
   };
   const playerToBeAdded: SpursPlayer = data;
-  teamRoster.push(playerToBeAdded);
+  writeToJson(playerToBeAdded);
 
   res.status(201).json(data);
 };
@@ -50,15 +49,15 @@ export const updatePlayerInfo = (req: Request, res: Response) => {
   }
 };
 
-export const validatePlayer = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const result = playerSchema.validate(req.body);
-  if (!result.error) {
-    next();
-  } else {
-    res.status(400).json(result.error.message);
-  }
-};
+// export const validatePlayer = (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const result = playerSchema.validate(req.body);
+//   if (!result.error) {
+//     next();
+//   } else {
+//     res.status(400).json(result.error.message);
+//   }
+// };

@@ -5,8 +5,8 @@ import {
   getPlayerByNumber,
   savePlayer,
   updatePlayerInfo,
-  validatePlayer,
 } from "./apiController";
+import { validatePlayer } from "./middlewares";
 
 const app = Express();
 const port: number = 3000;

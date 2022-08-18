@@ -8,6 +8,8 @@ export interface SpursPlayer {
   nationality: string;
 }
 
+export const teamRoster: SpursPlayer[] = [];
+
 export const playerSchema = Joi.object<SpursPlayer, false>({
   name: Joi.string().required().min(3).max(42),
   position: Joi.string()
