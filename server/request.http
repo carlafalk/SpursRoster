@@ -31,6 +31,7 @@ Content-Type: application/json
 {
     "name": "Harry Kane",
     "position": "striker",
-    "number": 55,
-    "nationality": "Brittish"
+    "number": 10,
+    "nationality": "Brittish",
+    "imageURL":"https://cdne-totv8-prod.azureedge.net/media/tkgczptd/firstteam_profiles_202223_harrykane.png?anchor=center&mode=crop&quality=100&width=750"
 }
