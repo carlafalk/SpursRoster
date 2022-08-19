@@ -1,20 +1,22 @@
 import Joi from "joi";
 
-export interface SpursPlayer {
+export interface spursPlayer {
   id: string;
   name: string;
-  position: string;
   number: number;
+  imageURL: string;
+  position: string;
   nationality: string;
 }
 
-export const teamRoster: SpursPlayer[] = [];
+export const teamRoster: spursPlayer[] = [];
 
-export const playerSchema = Joi.object<SpursPlayer, false>({
+export const playerSchema = Joi.object<spursPlayer, false>({
   name: Joi.string().required().min(3).max(42),
+  imageURL: Joi.string().required(),
+  number: Joi.number().required().max(99).min(1),
   position: Joi.string()
     .required()
     .valid("striker", "goal keeper", "defender", "midfielder", "manager"),
-  number: Joi.number().required().max(99).min(1),
   nationality: Joi.string().required().min(3).max(42),
 });

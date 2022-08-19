@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { nanoid } from "nanoid";
 import { readFromJson, writeToJson } from "./middlewares";
-import { SpursPlayer, teamRoster } from "./playerModel";
+import { spursPlayer, teamRoster } from "./playerModel";
 
 export const getAllPlayers = (req: Request, res: Response) => {
   readFromJson();
@@ -13,7 +13,8 @@ export const getAllPlayers = (req: Request, res: Response) => {
 };
 
 export const savePlayer = (req: Request, res: Response) => {
-  const data: SpursPlayer = {
+  readFromJson();
+  const data: spursPlayer = {
     id: nanoid(),
     ...req.body,
   };
@@ -45,7 +46,10 @@ export const updatePlayerInfo = (req: Request, res: Response) => {
 
   if (selectedPlayer) {
     const selectedPlayerIndex = teamRoster.indexOf(selectedPlayer);
-    teamRoster[selectedPlayerIndex] = req.body;
+    teamRoster[selectedPlayerIndex] = {
+      id: nanoid(),
+      ...req.body,
+    };
     writeToJson();
     res.status(200).json(teamRoster[selectedPlayerIndex]);
   } else if (teamRoster.length === 0) {
