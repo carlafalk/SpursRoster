@@ -33,16 +33,12 @@ export const deleteAllPlayers = (req: Request, res: Response) => {
 
 export const getPlayerByNumber = (req: Request, res: Response) => {
   readFromJson();
-  res
-    .status(200)
-    .json(teamRoster.find((x) => x.number === parseInt(req.params.number)));
+  res.status(200).json(teamRoster.find((x) => x.number === req.params.number));
 };
 
 export const updatePlayerInfo = (req: Request, res: Response) => {
   readFromJson();
-  const selectedPlayer = teamRoster.find(
-    (x) => x.number === parseInt(req.params.number)
-  );
+  const selectedPlayer = teamRoster.find((x) => x.number === req.params.number);
 
   if (selectedPlayer) {
     const selectedPlayerIndex = teamRoster.indexOf(selectedPlayer);
