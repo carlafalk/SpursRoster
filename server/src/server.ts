@@ -13,11 +13,11 @@ const port: number = 3000;
 
 app.use(Express.json());
 
-app.get("/", getAllPlayers);
-app.get("/:number", getPlayerByNumber);
-app.post("/", validatePlayer, savePlayer);
-app.delete("/", deleteAllPlayers);
-app.put("/:number", validatePlayer, updatePlayerInfo);
+app.get("/api/", getAllPlayers);
+app.get("/api/:number", getPlayerByNumber);
+app.post("/api/", validatePlayer, savePlayer);
+app.delete("/api/", deleteAllPlayers);
+app.put("/api/:number", validatePlayer, updatePlayerInfo);
 
 // app.use(notFoundHandler);
 // app.use(errorHandler);

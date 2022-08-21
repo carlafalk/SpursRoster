@@ -3,8 +3,8 @@ import Joi from "joi";
 export interface spursPlayer {
   id: string;
   name: string;
-  number: number;
-  imageURL?: string;
+  number: string;
+  imageURL: string;
   position: string;
   nationality: string;
 }
