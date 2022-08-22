@@ -62,4 +62,19 @@ async function createPlayerCards() {
   }
 }
 
+const numberForm = document.getElementById("numberForm") as HTMLInputElement;
+const nameForm = document.getElementById("nameForm") as HTMLInputElement;
+const positionForm = document.getElementById("positionForm") as HTMLInputElement;
+const nationalityForm = document.getElementById("nationalityForm") as HTMLInputElement;
+const imageForm = document.getElementById("imageForm") as HTMLInputElement;
+
+let player: spursPlayer = {
+  id: "asd",
+  number: numberForm.value,
+  name: nameForm.value,
+  position: positionForm.value,
+  nationality: nationalityForm.value,
+  imageURL: imageForm.value,
+};
+
 createPlayerCards();

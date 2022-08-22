@@ -98,3 +98,12 @@ html {
   margin-right: 4rem;
   cursor: pointer;
 }
+
+.formDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.input {
+  margin-left: 1rem;
+}
