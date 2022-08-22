@@ -25,18 +25,6 @@ export function writeToJson() {
   });
 }
 
-// export function readFromJson() {
-//   fs.readFile("./src/players.json", "utf-8", (err, teamRosterString) => {
-//     if (err) {
-//       console.error(err);
-//     } else {
-//       let teamRosterJSON = JSON.parse(teamRosterString);
-//       teamRoster.splice(0, teamRoster.length);
-//       teamRoster.push(...teamRosterJSON);
-//     }
-//   });
-// }
-
 export function readFromJson() {
   let teamRosterString = fs.readFileSync("./src/players.json", "utf-8");
   const teamRosterJSON = JSON.parse(teamRosterString);

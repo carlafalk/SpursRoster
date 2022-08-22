@@ -12,9 +12,11 @@ async function createPlayerCards() {
   const teamRoster = await fetchData();
 
   const contentContainerDiv = document.getElementById("content-container");
+  // const modalBtn = document.getElementById("modal-button");
 
   if (contentContainerDiv) {
     for (let i = 0; i < teamRoster.length; i++) {
+      //CREATING ELEMENTS
       const playerCardDiv: HTMLDivElement = document.createElement("div");
       const infoDiv: HTMLDivElement = document.createElement("div");
       const nameDiv: HTMLDivElement = document.createElement("div");
@@ -25,6 +27,7 @@ async function createPlayerCards() {
       const deleteBtn: HTMLElement = document.createElement("i");
       const putBtn: HTMLElement = document.createElement("i");
 
+      //ADDING CLASSES
       playerCardDiv.classList.add("playerCard");
       playerCardDiv.style.backgroundImage = `url(${teamRoster[i].imageURL})`;
       nameDiv.classList.add("name");
@@ -36,15 +39,20 @@ async function createPlayerCards() {
       deleteBtn.classList.add("delete-btn", "fa-solid", "fa-trash");
       putBtn.classList.add("put-btn", "fa-solid", "fa-pen-to-square");
 
+      //SET ATTRIBUTES
+      putBtn.setAttribute("data-toggle", "modal");
+      putBtn.setAttribute("data-target", "#exampleModalCenter");
+
+      //APPENDING ELEMENTS
       contentContainerDiv.appendChild(playerCardDiv);
       playerCardDiv.appendChild(infoDiv);
       playerCardDiv.appendChild(buttonsDiv);
       buttonsDiv.appendChild(putBtn);
       buttonsDiv.appendChild(deleteBtn);
       infoDiv.appendChild(numberDiv);
-      infoDiv.appendChild(nationalityDiv);
-      infoDiv.appendChild(positionDiv);
       infoDiv.appendChild(nameDiv);
+      infoDiv.appendChild(positionDiv);
+      infoDiv.appendChild(nationalityDiv);
 
       nameDiv.innerHTML = teamRoster[i].name;
       numberDiv.innerHTML = teamRoster[i].number;
