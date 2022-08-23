@@ -1,11 +1,45 @@
-import { spursPlayer } from "./playerModel";
+import { SpursPlayer, SpursPlayerCreate } from "./playerModel";
 import "./style.css";
+
+window.addEventListener("DOMContentLoaded", main);
+
+function main() {
+  createPlayerCards();
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", addPlayer);
+}
 
 async function fetchData() {
   const result = await fetch("/api");
-  let roster: spursPlayer[] = await result.json();
+  let roster: SpursPlayer[] = await result.json();
 
   return roster;
+}
+
+async function addPlayer(e: SubmitEvent) {
+  e.preventDefault();
+  const numberInput = document.getElementById("numberForm") as HTMLInputElement;
+  const nameInput = document.getElementById("nameForm") as HTMLInputElement;
+  const positionInput = document.getElementById("positionForm") as HTMLInputElement;
+  const nationalityInput = document.getElementById("nationalityForm") as HTMLInputElement;
+  const imageInput = document.getElementById("imageForm") as HTMLInputElement;
+
+  let player: SpursPlayerCreate = {
+    number: numberInput.value,
+    name: nameInput.value,
+    position: positionInput.value,
+    nationality: nationalityInput.value,
+    imageURL: imageInput.value,
+  };
+
+  const response = await fetch("/api", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(player),
+  });
+  const data = await response.json();
+
+  console.log(data);
 }
 
 async function createPlayerCards() {
@@ -44,7 +78,6 @@ async function createPlayerCards() {
       putBtn.setAttribute("data-target", "#exampleModalCenter");
 
       //APPENDING ELEMENTS
-      contentContainerDiv.appendChild(playerCardDiv);
       playerCardDiv.appendChild(infoDiv);
       playerCardDiv.appendChild(buttonsDiv);
       buttonsDiv.appendChild(putBtn);
@@ -53,6 +86,7 @@ async function createPlayerCards() {
       infoDiv.appendChild(nameDiv);
       infoDiv.appendChild(positionDiv);
       infoDiv.appendChild(nationalityDiv);
+      contentContainerDiv.appendChild(playerCardDiv);
 
       nameDiv.innerHTML = teamRoster[i].name;
       numberDiv.innerHTML = teamRoster[i].number;
@@ -61,20 +95,3 @@ async function createPlayerCards() {
     }
   }
 }
-
-const numberForm = document.getElementById("numberForm") as HTMLInputElement;
-const nameForm = document.getElementById("nameForm") as HTMLInputElement;
-const positionForm = document.getElementById("positionForm") as HTMLInputElement;
-const nationalityForm = document.getElementById("nationalityForm") as HTMLInputElement;
-const imageForm = document.getElementById("imageForm") as HTMLInputElement;
-
-let player: spursPlayer = {
-  id: "asd",
-  number: numberForm.value,
-  name: nameForm.value,
-  position: positionForm.value,
-  nationality: nationalityForm.value,
-  imageURL: imageForm.value,
-};
-
-createPlayerCards();

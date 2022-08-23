@@ -1,4 +1,4 @@
-export interface spursPlayer {
+export interface SpursPlayer {
   id: string;
   name: string;
   number: string;
@@ -7,4 +7,6 @@ export interface spursPlayer {
   nationality: string;
 }
 
-export const teamRoster: spursPlayer[] = [];
+export type SpursPlayerCreate = Omit<SpursPlayer, "id">;
+
+export const teamRoster: SpursPlayer[] = [];

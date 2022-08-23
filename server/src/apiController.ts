@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { nanoid } from "nanoid";
 import { readFromJson, writeToJson } from "./middlewares";
-import { spursPlayer, teamRoster } from "./playerModel";
+import { SpursPlayer, teamRoster } from "./playerModel";
 
 export const getAllPlayers = (req: Request, res: Response) => {
   readFromJson();
@@ -14,7 +14,7 @@ export const getAllPlayers = (req: Request, res: Response) => {
 
 export const savePlayer = (req: Request, res: Response) => {
   readFromJson();
-  const data: spursPlayer = {
+  const data: SpursPlayer = {
     id: nanoid(),
     ...req.body,
   };

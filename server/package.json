@@ -7,7 +7,7 @@
     "start": "node dist/server.js",
     "build": "tsc",
     "check": "tsc --noEmit",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon --ignore ./**/*.json src/server.ts"
   },
   "keywords": [],
   "author": "",
