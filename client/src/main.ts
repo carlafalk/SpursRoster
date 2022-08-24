@@ -15,15 +15,25 @@ function main() {
 async function getPlayerByNumber(e: SubmitEvent) {
   e.preventDefault();
   const numberInput = document.getElementById("getPlayerByNumberInput") as HTMLInputElement;
-  console.log(numberInput.value);
+  const seacrhButton = document.getElementById("confirmSearchButton");
+  const showPlayerModalName = document.getElementById("ShowPlayerModalName");
+  const showPlayerModalNumber = document.getElementById("ShowPlayerModalNumber");
 
   const response = await fetch(`/api/${numberInput.value}`);
   const player: SpursPlayer = await response.json();
-  console.log(player);
+
+  seacrhButton?.setAttribute("data-toggle", "modal");
+  seacrhButton?.setAttribute("data-target", "#getPlayerByNumberModal");
+
+  if (showPlayerModalName) {
+    showPlayerModalName.innerHTML = player.name;
+  }
+  if (showPlayerModalNumber) {
+  }
+  // showPlayerModalbody.innerHTML = `number:    ${player.number} \nposition:    ${player.position} \nnationality    ${player.nationality}`;
 }
 
 async function fetchData() {
-  // await fetch("/api");
   const response = await fetch("/api");
   let roster: SpursPlayer[] = await response.json();
 
