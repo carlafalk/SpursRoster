@@ -7,8 +7,10 @@ export const getAllPlayers = (req: Request, res: Response) => {
   readFromJson();
   if (teamRoster.length < 1) {
     res.status(204).json();
-  } else {
+  } else if (teamRoster) {
     res.status(200).json(teamRoster);
+  } else {
+    res.status(404).json();
   }
 };
 
@@ -28,12 +30,34 @@ export const deleteAllPlayers = (req: Request, res: Response) => {
   readFromJson();
   teamRoster.splice(0, teamRoster.length);
   writeToJson();
-  res.status(200).json();
+  if (teamRoster.length < 1) {
+    res.status(404).json();
+  } else {
+    res.status(200).json();
+  }
+};
+
+export const deletePlayerByNumber = (req: Request, res: Response) => {
+  readFromJson();
+  const playerToDelete = teamRoster.find((x) => x.number === req.params.number);
+  if (playerToDelete) {
+    const playerToDeleteIndex = teamRoster.indexOf(playerToDelete);
+    teamRoster.splice(playerToDeleteIndex, 1);
+    writeToJson();
+    res.status(200).json();
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const getPlayerByNumber = (req: Request, res: Response) => {
   readFromJson();
-  res.status(200).json(teamRoster.find((x) => x.number === req.params.number));
+  const selectedPlayer = teamRoster.find((x) => x.number === req.params.number);
+  if (selectedPlayer) {
+    res.status(200).json(selectedPlayer);
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const updatePlayerInfo = (req: Request, res: Response) => {

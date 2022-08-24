@@ -9,4 +9,6 @@ export interface SpursPlayer {
 
 export type SpursPlayerCreate = Omit<SpursPlayer, "id">;
 
+export type SpursPlayerUpdate = Omit<SpursPlayer, "id">;
+
 export const teamRoster: SpursPlayer[] = [];

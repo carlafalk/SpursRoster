@@ -42,20 +42,20 @@
           </div>
           <div class="modal-body formDiv">
             <form action="" id="form">
-              <label for="numberForm">number:</label>
-              <input name="numberForm" type="text" id="numberForm" />
+              <label for="numberInput">number</label><br />
+              <input type="text" id="numberInput" />
               <br />
-              <label for="nameForm">name:</label>
-              <input name="nameForm" type="text" id="nameForm" />
+              <label for="nameInput">name</label><br />
+              <input type="text" id="nameInput" />
               <br />
-              <label for="positionForm">position:</label>
-              <input name="positionForm" type="text" id="positionForm" />
+              <label for="positionInput">position</label><br />
+              <input type="text" id="positionInput" />
               <br />
-              <label for="nationalityForm">nationality:</label>
-              <input name="nationalityForm" type="text" id="nationalityForm" />
+              <label for="nationalityInput">nationality</label><br />
+              <input type="text" id="nationalityInput" />
               <br />
-              <label for="imageForm">image URL:</label>
-              <input name="imageForm" value="" type="text" id="imageForm" />
+              <label for="imageInput">image URL</label><br />
+              <input type="text" id="imageInput" />
               <br />
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button id="submitPostButton" type="submit" class="btn btn-primary">confirm</button>
@@ -65,12 +65,58 @@
         </div>
       </div>
     </div>
+
+    <!-- UPDATE-Modal -->
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit player</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body formDiv">
+            <form action="" id="editForm">
+              <label for="numberInput">number</label><br />
+              <input type="text" id="editNumberInput" placeholder="test" />
+              <br />
+              <label for="nameInput">name</label><br />
+              <input type="text" id="editNameInput" />
+              <br />
+              <label for="positionInput">position</label><br />
+              <input type="text" id="editPositionInput" />
+              <br />
+              <label for="nationalityInput">nationality</label><br />
+              <input type="text" id="editNationalityInput" />
+              <br />
+              <label for="imageInput">image URL</label><br />
+              <input type="text" id="editImageInput" />
+              <br />
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="confirmEditButton" type="submit" class="btn btn-primary">confirm</button>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER -->
     <div class="header-container">
       <div class="header" id="header">
         <img class="spurs-logo" src="https://cdne-totv8-prod.azureedge.net/media/2282/spurs-white-no-text-300x300.png" alt="" />
+        <div>
+          <form id="searcForm">
+            <input type="text" id="getPlayerByNumberInput" placeholder="Enter number" />
+            <button style="background-color: rgba(255, 255, 255, 0); border: none" id="confirmSearchButton" type="submit"><i style="color: white" class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+        </div>
         <button class="post-btn fa-solid fa-plus" data-toggle="modal" data-target="#exampleModalCenter"></button>
       </div>
     </div>
+
+    <!-- CONTENT CONTAINER -->
     <div class="parent-container">
       <div class="content-container" id="content-container"></div>
     </div>

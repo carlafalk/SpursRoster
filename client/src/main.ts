@@ -1,4 +1,4 @@
-import { SpursPlayer, SpursPlayerCreate } from "./playerModel";
+import { SpursPlayer, SpursPlayerCreate, SpursPlayerUpdate } from "./playerModel";
 import "./style.css";
 
 window.addEventListener("DOMContentLoaded", main);
@@ -7,22 +7,61 @@ function main() {
   createPlayerCards();
   const form = document.getElementById("form");
   form?.addEventListener("submit", addPlayer);
+  const searchForm = document.getElementById("searcForm");
+  searchForm?.addEventListener("submit", getPlayerByNumber);
+  const editForm = document.getElementById("editForm");
+  editForm?.addEventListener("submit", updatePlayerInfo);
+}
+async function getPlayerByNumber(e: SubmitEvent) {
+  e.preventDefault();
+  const numberInput = document.getElementById("getPlayerByNumberInput") as HTMLInputElement;
+  console.log(numberInput.value);
+
+  const response = await fetch(`/api/${numberInput.value}`);
+  const player: SpursPlayer = await response.json();
+  console.log(player);
 }
 
 async function fetchData() {
-  const result = await fetch("/api");
-  let roster: SpursPlayer[] = await result.json();
+  // await fetch("/api");
+  const response = await fetch("/api");
+  let roster: SpursPlayer[] = await response.json();
 
   return roster;
 }
 
-async function addPlayer(e: SubmitEvent) {
+async function updatePlayerInfo(e: SubmitEvent) {
   e.preventDefault();
-  const numberInput = document.getElementById("numberForm") as HTMLInputElement;
-  const nameInput = document.getElementById("nameForm") as HTMLInputElement;
-  const positionInput = document.getElementById("positionForm") as HTMLInputElement;
-  const nationalityInput = document.getElementById("nationalityForm") as HTMLInputElement;
-  const imageInput = document.getElementById("imageForm") as HTMLInputElement;
+
+  const editNumberInput = document.getElementById("editNumberInput") as HTMLInputElement;
+  const editNameInput = document.getElementById("editNameInput") as HTMLInputElement;
+  const editPositionInput = document.getElementById("editPositionInput") as HTMLInputElement;
+  const editNationalityInput = document.getElementById("editNationalityInput") as HTMLInputElement;
+  const editImageInput = document.getElementById("editImageInput") as HTMLInputElement;
+
+  let player: SpursPlayerUpdate = {
+    number: editNumberInput.value,
+    name: editNameInput.value,
+    position: editPositionInput.value,
+    nationality: editNationalityInput.value,
+    imageURL: editImageInput.value,
+  };
+  const response = await fetch(`/api/${editNumberInput.value}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(player),
+  });
+  await response.json();
+  location.reload();
+}
+
+async function addPlayer(e: SubmitEvent) {
+  const numberInput = document.getElementById("numberInput") as HTMLInputElement;
+  const nameInput = document.getElementById("nameInput") as HTMLInputElement;
+  const positionInput = document.getElementById("positionInput") as HTMLInputElement;
+  const nationalityInput = document.getElementById("nationalityInput") as HTMLInputElement;
+  const imageInput = document.getElementById("imageInput") as HTMLInputElement;
+  e.preventDefault();
 
   let player: SpursPlayerCreate = {
     number: numberInput.value,
@@ -37,16 +76,28 @@ async function addPlayer(e: SubmitEvent) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(player),
   });
-  const data = await response.json();
+  await response.json();
+  location.reload();
+}
 
-  console.log(data);
+function loadForm(player: SpursPlayer) {
+  const editNumberInput = document.getElementById("editNumberInput") as HTMLInputElement;
+  const editNameInput = document.getElementById("editNameInput") as HTMLInputElement;
+  const editPositionInput = document.getElementById("editPositionInput") as HTMLInputElement;
+  const editNationalityInput = document.getElementById("editNationalityInput") as HTMLInputElement;
+  const editImageInput = document.getElementById("editImageInput") as HTMLInputElement;
+
+  editNumberInput.value = player.number;
+  editNameInput.value = player.name;
+  editPositionInput.value = player.position;
+  editNationalityInput.value = player.nationality;
+  editImageInput.value = player.imageURL;
 }
 
 async function createPlayerCards() {
   const teamRoster = await fetchData();
 
   const contentContainerDiv = document.getElementById("content-container");
-  // const modalBtn = document.getElementById("modal-button");
 
   if (contentContainerDiv) {
     for (let i = 0; i < teamRoster.length; i++) {
@@ -73,9 +124,21 @@ async function createPlayerCards() {
       deleteBtn.classList.add("delete-btn", "fa-solid", "fa-trash");
       putBtn.classList.add("put-btn", "fa-solid", "fa-pen-to-square");
 
+      //EVENTLISTENERS
+      deleteBtn.addEventListener("click", async () => {
+        await fetch(`/api/${teamRoster[i].number}`, {
+          method: "DELETE",
+        });
+        location.reload();
+      });
+
+      putBtn.addEventListener("click", () => {
+        loadForm(teamRoster[i]);
+      });
+
       //SET ATTRIBUTES
       putBtn.setAttribute("data-toggle", "modal");
-      putBtn.setAttribute("data-target", "#exampleModalCenter");
+      putBtn.setAttribute("data-target", "#edit-modal");
 
       //APPENDING ELEMENTS
       playerCardDiv.appendChild(infoDiv);
@@ -88,6 +151,7 @@ async function createPlayerCards() {
       infoDiv.appendChild(nationalityDiv);
       contentContainerDiv.appendChild(playerCardDiv);
 
+      //SET INNERHTML
       nameDiv.innerHTML = teamRoster[i].name;
       numberDiv.innerHTML = teamRoster[i].number;
       nationalityDiv.innerHTML = teamRoster[i].nationality;
