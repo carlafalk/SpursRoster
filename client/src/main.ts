@@ -18,6 +18,9 @@ async function getPlayerByNumber(e: SubmitEvent) {
   const seacrhButton = document.getElementById("confirmSearchButton");
   const showPlayerModalName = document.getElementById("ShowPlayerModalName");
   const showPlayerModalNumber = document.getElementById("ShowPlayerModalNumber");
+  const showPlayerModalPosition = document.getElementById("ShowPlayerModalPosition");
+  const showPlayerModalNationality = document.getElementById("ShowPlayerModalNationality");
+  const showPlayerModalImage = document.getElementById("showPlayerModalImage");
 
   const response = await fetch(`/api/${numberInput.value}`);
   const player: SpursPlayer = await response.json();
@@ -25,12 +28,14 @@ async function getPlayerByNumber(e: SubmitEvent) {
   seacrhButton?.setAttribute("data-toggle", "modal");
   seacrhButton?.setAttribute("data-target", "#getPlayerByNumberModal");
 
-  if (showPlayerModalName) {
+  if (showPlayerModalName && showPlayerModalNumber && showPlayerModalPosition && showPlayerModalNationality && showPlayerModalImage) {
     showPlayerModalName.innerHTML = player.name;
+    showPlayerModalNumber.innerHTML = `number:${player.number}`;
+    showPlayerModalPosition.innerHTML = `position:${player.position}`;
+    showPlayerModalNationality.innerHTML = `nationality:${player.nationality}`;
+
+    showPlayerModalImage.setAttribute("src", `${player.imageURL}`);
   }
-  if (showPlayerModalNumber) {
-  }
-  // showPlayerModalbody.innerHTML = `number:    ${player.number} \nposition:    ${player.position} \nnationality    ${player.nationality}`;
 }
 
 async function fetchData() {

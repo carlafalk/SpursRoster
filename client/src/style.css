@@ -107,3 +107,7 @@ html {
 .input {
   margin-left: 1rem;
 }
+
+.showPlayerModalImage {
+  max-width: 30rem;
+}
