@@ -1,6 +1,6 @@
 # SpursRoster expressAPI
 
-School project API built using Express.
+API built with typescript and express, UI built with vite vanilla-typescript 
 
 ## Requirements
 ```
