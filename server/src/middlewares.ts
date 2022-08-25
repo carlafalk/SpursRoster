@@ -1,12 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import fs from "fs";
-import { playerSchema, teamRoster } from "./playerModel";
+import { playerSchema } from "./playerModel";
 
-export const validatePlayer = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const validatePlayer = (req: Request, res: Response, next: NextFunction) => {
   const result = playerSchema.validate(req.body);
   if (!result.error) {
     next();
@@ -14,24 +9,6 @@ export const validatePlayer = (
     res.status(400).json(result.error.message);
   }
 };
-
-export function writeToJson() {
-  const teamRosterString = JSON.stringify(teamRoster, null, "\t");
-
-  fs.writeFile("./src/players.json", teamRosterString, (err: any) => {
-    if (err) {
-      console.log(err);
-    }
-  });
-}
-
-export function readFromJson() {
-  let teamRosterString = fs.readFileSync("./src/players.json", "utf-8");
-  const teamRosterJSON = JSON.parse(teamRosterString);
-
-  teamRoster.splice(0, teamRoster.length);
-  teamRoster.push(...teamRosterJSON);
-}
 
 // export const errorHandler = (
 //   err: Error,

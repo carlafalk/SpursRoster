@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { nanoid } from "nanoid";
-import { readFromJson, writeToJson } from "./middlewares";
+import { readFromJson, writeToJson } from "./dataManager";
 import { SpursPlayer, teamRoster } from "./playerModel";
 
 export const getAllPlayers = (req: Request, res: Response) => {
