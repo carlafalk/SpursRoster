@@ -10,20 +10,11 @@ export const validatePlayer = (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-// export const errorHandler = (
-//   err: Error,
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   console.error(err);
-//   res.status(500).json(err.message);
-// };
+export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+  res.status(500).json(err.message);
+};
 
-// export const notFoundHandler = (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   res.status(404).json("Resource does not exist.");
-// };
+export const notFoundHandler = (req: Request, res: Response, next: NextFunction) => {
+  res.status(404).json("Resource does not exist.");
+};
